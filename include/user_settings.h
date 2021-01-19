@@ -4,36 +4,34 @@
  *
  * This file is part of wolfSSL.
  *
- * wolfSSL is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * Contact licensing@wolfssl.com with any questions or comments.
  *
- * wolfSSL is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+ * https://www.wolfssl.com
  */
+
+#include "sdkconfig.h"
+
+#define WOLFSSL_ESPIDF
+#define WOLFSSL_ESPWROOM32
 
 #define BENCH_EMBEDDED
 #define USE_CERT_BUFFERS_2048
 
-/* TLS 1.3                                 */
-#define WOLFSSL_TLS13
+
+#define HAVE_SESSION_TICKET
+
 #define HAVE_TLS_EXTENSIONS
 #define WC_RSA_PSS
 #define HAVE_HKDF
 #define HAVE_AEAD
 #define HAVE_SUPPORTED_CURVES
-
+#define HAVE_SNI
+/* ALPN in wolfSSL is enabled by default,can be disabled with menuconfig */
+#define HAVE_ALPN
 /* when you want to use SINGLE THREAD */
 /* #define SINGLE_THREADED */
 #define NO_FILESYSTEM
-
+#define WOLFSSL_STATIC_PSK
 #define HAVE_AESGCM
 /* when you want to use SHA384 */
 /* #define WOLFSSL_SHA384 */
@@ -42,11 +40,34 @@
 #define HAVE_CURVE25519
 #define CURVE25519_SMALL
 #define HAVE_ED25519
+/* do not use wolfssl defined app_main function used to test esp-wolfssl */
+#define NO_MAIN_DRIVER
+/* you can disable folowing cipher suits by uncommenting following lines */
+//#define NO_DSA
+//#define NO_DH
 
 /* when you want to use aes counter mode */
 /* #define WOLFSSL_AES_DIRECT */
 /* #define WOLFSSL_AES_COUNTER */
 
+/* These Flags are defined to make wolfssl not use some insecure cipher suites */
+#define NO_MD4
+#define NO_DES3
+#define NO_RC4
+#define NO_RABBIT
+
+#define OPENSSL_EXTRA_X509_SMALL /* Allows of x509 certs (for wolfssl_get_verify_result function)*/
+#define WOLFSSL_ALT_CERT_CHAINS /* Allow to try alternate cert chain */
+
+#define WOLFSSL_BASE64_ENCODE
+//#define OPENSSL_EXTRA
+#define OPENSSL_ALL
+/* If you want to authenticate the server with Intermediate CA cert, enable following flag */
+#define WOLFSSL_SMALL_CERT_VERIFY
+
+/* Reduces the Cache used by wolfssl and thus reduces heap used */
+#define WOLFSSL_SMALL_STACK
+#define SMALL_SESSION_CACHE
 /* esp32-wroom-32se specific definition */
 #if defined(WOLFSSL_ESPWROOM32SE)
     #define WOLFSSL_ATECC508A
@@ -62,7 +83,7 @@
     /* Define USE_FAST_MATH and SMALL_STACK                        */
     #define ESP32_USE_RSA_PRIMITIVE
     /* threshold for performance adjustment for hw primitive use   */
-    /* X bits of G^X mod P greater than                            */ 
+    /* X bits of G^X mod P greater than                            */
     #define EPS_RSA_EXPT_XBTIS           36
     /* X and Y of X * Y mod P greater than                         */
     #define ESP_RSA_MULM_BITS            2000
@@ -76,11 +97,15 @@
 /* date/time                               */
 /* if it cannot adjust time in the device, */
 /* enable macro below                      */
-/* #define NO_ASN_TIME */
-/* #define XTIME time */
+//#define NO_ASN_TIME
+//#define XTIME time
+//#define XGMTIME(c, t) gmtime((c))
 
 /* when you want not to use HW acceleration */
-/* #define NO_ESP32WROOM32_CRYPT */
-/* #define NO_WOLFSSL_ESP32WROOM32_CRYPT_HASH*/
+#if !defined(CONFIG_IDF_TARGET_ESP32)
+#define NO_ESP32WROOM32_CRYPT
+#endif
+/* Turn off the sha acceleration for esp32 */
+#define NO_WOLFSSL_ESP32WROOM32_CRYPT_HASH
 /* #define NO_WOLFSSL_ESP32WROOM32_CRYPT_AES */
 /* #define NO_WOLFSSL_ESP32WROOM32_CRYPT_RSA_PRI */

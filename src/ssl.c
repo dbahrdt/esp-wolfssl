@@ -25484,12 +25484,14 @@ void wolfSSL_ASN1_TYPE_free(WOLFSSL_ASN1_TYPE* at)
             case V_ASN1_OBJECT:
                 wolfSSL_ASN1_OBJECT_free(at->value.object);
                 break;
+#if !defined(NO_ASN_TIME) && !defined(USER_TIME) && !defined(TIME_OVERRIDES)
             case V_ASN1_UTCTIME:
                 wolfSSL_ASN1_TIME_free(at->value.utctime);
                 break;
             case V_ASN1_GENERALIZEDTIME:
                 wolfSSL_ASN1_TIME_free(at->value.generalizedtime);
                 break;
+#endif
             default:
                 WOLFSSL_MSG("Unknown or unsupported ASN1_TYPE");
                 break;
@@ -47884,7 +47886,7 @@ int wolfSSL_PEM_write_bio_PKCS8PrivateKey(WOLFSSL_BIO* bio,
     byte* key = NULL;
     word32 keySz;
     byte* pem = NULL;
-    int pemSz;
+    int pemSz = 0;
     int type = PKCS8_PRIVATEKEY_TYPE;
     int algId;
     const byte* curveOid;
