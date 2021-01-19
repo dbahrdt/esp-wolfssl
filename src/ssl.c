@@ -51449,9 +51449,9 @@ static int bio_get_data(WOLFSSL_BIO* bio, byte** data)
     int ret = 0;
     byte* mem = NULL;
 #ifndef NO_FILESYSTEM
-    long memSz;
+    long memSz = 0;
     XFILE file;
-    long curr;
+    long curr = 0;
 #endif
 
     if ((ret = wolfSSL_BIO_pending(bio)) > 0) {
