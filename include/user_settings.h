@@ -17,6 +17,9 @@
 #define BENCH_EMBEDDED
 #define USE_CERT_BUFFERS_2048
 
+
+#define HAVE_SESSION_TICKET
+
 #define HAVE_TLS_EXTENSIONS
 #define WC_RSA_PSS
 #define HAVE_HKDF
