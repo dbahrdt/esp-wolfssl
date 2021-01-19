@@ -43,8 +43,8 @@
 /* do not use wolfssl defined app_main function used to test esp-wolfssl */
 #define NO_MAIN_DRIVER
 /* you can disable folowing cipher suits by uncommenting following lines */
-//#define NO_DSA
-//#define NO_DH
+#define NO_DSA
+#define NO_DH
 
 /* when you want to use pkcs7 */
 /* #define HAVE_PKCS7 */
