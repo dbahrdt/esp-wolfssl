@@ -19,7 +19,7 @@
 
 
 #define HAVE_SESSION_TICKET
-
+#define WOLFSSL_TLS13
 #define HAVE_TLS_EXTENSIONS
 #define WC_RSA_PSS
 #define HAVE_HKDF
