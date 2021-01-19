@@ -94,9 +94,9 @@
 /* date/time                               */
 /* if it cannot adjust time in the device, */
 /* enable macro below                      */
-#define NO_ASN_TIME
-#define XTIME time
-#define XGMTIME(c, t) gmtime((c))
+//#define NO_ASN_TIME
+//#define XTIME time
+//#define XGMTIME(c, t) gmtime((c))
 
 /* when you want not to use HW acceleration */
 #if !defined(CONFIG_IDF_TARGET_ESP32)
