@@ -111,7 +111,7 @@ enum ASN_Tags {
     ASN_CONTEXT_SPECIFIC  = 0x80,
 };
 
-#define ASN_UTC_TIME_SIZE 14
+#define ASN_UTC_TIME_SIZE 68
 #define ASN_GENERALIZED_TIME_SIZE 16
 #define ASN_GENERALIZED_TIME_MAX 68
 
@@ -372,7 +372,7 @@ enum Misc_ASN {
 #if defined(OPENSSL_ALL)  || defined(WOLFSSL_MYSQL_COMPATIBLE) || \
     defined(WOLFSSL_NGINX) || defined(WOLFSSL_HAPROXY) || \
     defined(OPENSSL_EXTRA) || defined(HAVE_PKCS7)
-    MAX_TIME_STRING_SZ  = 25,      /* Max length of formatted time string */
+    MAX_TIME_STRING_SZ  = 79,      /* Max length of formatted time string */
 #endif
 
     PKCS5_SALT_SZ       = 8,
