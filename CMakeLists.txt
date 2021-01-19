@@ -1,6 +1,6 @@
 #
 # cmake for wolfssl
-# 
+#
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DWOLFSSL_USER_SETTINGS")
 
@@ -19,7 +19,7 @@ set(COMPONENT_REQUIRES lwip)
 set(COMPONENT_ADD_INCLUDEDIRS
     "."
     "./include"
-    "../freertos/include/freertos" 
+    "../freertos/include/freertos"
     "${WOLFSSL_ROOT}"
     )
 
@@ -35,3 +35,6 @@ set(COMPONENT_SRCEXCLUDE
     )
 
 register_component()
+
+target_compile_options(${COMPONENT_LIB} INTERFACE -Wno-cpp)
+target_compile_definitions(${COMPONENT_LIB} INTERFACE WOLFSSL_USER_SETTINGS)
