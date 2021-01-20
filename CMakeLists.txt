@@ -19,7 +19,7 @@ set(COMPONENT_REQUIRES lwip)
 set(COMPONENT_ADD_INCLUDEDIRS
     "."
     "./include"
-    "../freertos/include/freertos"
+    "${IDF_PATH}/components/freertos/include/freertos"
     "${WOLFSSL_ROOT}"
     )
 
