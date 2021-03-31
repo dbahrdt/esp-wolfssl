@@ -1,4 +1,4 @@
-/* wolfssl_version.h.in
+/* wolfcrypt/test/test_paths.h
  *
  * Copyright (C) 2006-2020 wolfSSL Inc.
  *
@@ -19,22 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
  */
 
-
-#ifndef WOLFSSL_VERSION_H
-#define WOLFSSL_VERSION_H
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define LIBWOLFSSL_VERSION_STRING "4.7.0"
-#define LIBWOLFSSL_VERSION_HEX 0x04007000
-
-#ifdef __cplusplus
-}
-#endif
-
-
-#endif /* WOLFSSL_VERSION_H */
-
+#ifndef NO_FILESYSTEM
+    #define CERT_PREFIX "@abs_top_srcdir@/"
+    #define CERT_WRITE_TEMP_DIR "@abs_top_builddir@/"
+#endif /* NO_FILESYSTEM */
