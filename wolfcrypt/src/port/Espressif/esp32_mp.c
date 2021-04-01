@@ -93,6 +93,12 @@ static int esp_mp_hw_lock()
     }
     /* Enable RSA hardware */
     periph_module_enable(PERIPH_RSA_MODULE);
+	
+	// Initialize the RSA hardware (thanks to AdityaHPatwardhan)
+	// Also see ESP32 technical reference manual V4.4 section 24.3.1
+	
+	DPORT_REG_CLR_BIT(DPORT_RSA_PD_CTRL_REG, DPORT_RSA_PD);
+	
 
     return ret;
 }
