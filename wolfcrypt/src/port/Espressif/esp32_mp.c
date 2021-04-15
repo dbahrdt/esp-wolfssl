@@ -149,27 +149,13 @@ static void process_start(word32 reg)
     DPORT_REG_WRITE(reg, 1);
 }
 
-static int wolfssl_esp_dport_reg_read(word32 reg) {
-	return DPORT_REG_READ(reg);
-// 	return esp_dport_access_reg_read(reg);
-}
-
 /* wait until done */
 static int wait_uitil_done(word32 reg)
 {
     int timeout = 0;
     /* wait until done && not timeout */
-    while(1) {
-        if(++timeout < ESP_RSA_TIMEOUT && DPORT_REG_READ(reg) == 1){
-            break;
-        }
-// 		if (timeout >= ESP_RSA_TIMEOUT) {
-// 			break;
-// 		}
-//         if (wolfssl_esp_dport_reg_read(reg) == 1) {
-//             break;
-//         }
-// 		++timeout;
+    while(timeout < ESP_RSA_TIMEOUT && DPORT_REG_READ(reg) != 1) {
+		++timeout;
     }
 
     /* clear interrupt */
